@@ -1,0 +1,104 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="dolcebistroCart">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular Todo App</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="../cart.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<body ng-controller="mainController">
+    <div class="container">
+
+        <!-- HEADER AND TODO COUNT -->
+        <div class="jumbotron text-center">
+            <h1>Dolce Bistrô - Carrinho</h1>
+        </div>
+        <!-- TODO LIST -->
+        <div id="customer-list" class="row">
+            <div class="col-sm-6 col-sm-offset-0">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Produto</td>
+                            <td>Valor</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="product in products">
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.price | currency: 'R$ ' }}</td>
+                            <td>
+                                <span class="glyphicon glyphicon-minus-sign" ng-click="addToCart($index, '-');refreshValues()"></span>
+                                <span class="glyphicon glyphicon-plus-sign" ng-click="addToCart($index, '+');refreshValues()"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                <!--div class="thumbnail" ng-repeat="product in products">
+                    <p class="title">{{ product.name }} - {{ product.price | currency: 'R$ }}
+                    <p class="title">{{ product.name }}</p> 
+                    <p class="price">{{ product.price | currency: 'R$ ' }}</p> 
+                    <div class="rating">
+                      <p class="likes" ng-click="addToCart($index, '+')">+ {{ product.quantity }}</p>
+                      <p class="dislikes" ng-click="addToCart($index, '-')">- {{ product.dislikes }}</p>
+                    </div>
+                    <p class="likes" ng-click="addToCart($index)">Add</p>
+                </div--> 
+                
+            </div>
+            <div class="col-sm-4 col-sm-offset-1">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Produto</td>
+                        <td>Quantidade</td>
+                        <td>Valor</td>
+                    </tr>
+                    <tr ng-repeat="productCart in cart | orderBy:'name'">
+                        <td>{{ productCart.name }}</td>
+                        <td>{{ productCart.quantity }}</td>
+                        <td>{{ productCart.price | currency: 'R$ '}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total geral:</td>
+                        <td></td>
+                        <td>{{ totalCart | currency: 'R$ ' }}</td>
+                </table>
+                <form ng-submit="sendCheckout(this.txtCustomer.value, 0)">
+                    <label for="txtCustomer">Cliente:</label>
+                    <input type="text" ng-model="txtCustomer"><br/>
+                    <label for="customers_combo">Selecione o cliente:</label>
+                    <select
+                        ng-options="customer as customer.name for customer in customers"
+                        ng-model="cboCustomer">
+                        <option selected="true">Selecione</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="">Finalizar Compra</button>
+                </form>
+            </div>
+            <p>{{ checkout.customer }}</p>
+        
+
+    </div>
+
+</body>
+</html>
