@@ -1,0 +1,87 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="dolcebistroCustomer">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Dolce Bistrô - Clientes</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<body ng-controller="mainController">
+    <div class="container">       
+
+        <!-- HEADER AND TODO COUNT -->
+        <div class="jumbotron text-center">
+            <h1>Dolce Bistrô <!--span class="label label-info">{{ customers.length }}</span--></h1>
+        </div>
+
+        <div ng-include="'views/shared/menu.html'"></div>
+
+        <!-- TODO LIST -->
+        <div id="customer-list" class="row">
+            <div class="col-sm-2 col-sm-offset-1">
+
+                <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                <div class="checkbox" ng-repeat="customer in customers | orderBy:'name'">
+                    <label>
+                        <input type="checkbox" ng-click="getOrders(customer.name)"> {{ customer.name }}
+                    </label>
+                </div>
+                <!--<select 
+                    ng-change="getOrders('{{user.id.name}}')" 
+                    ng-model="user.id" ng-options="user.name for user in customers | orderBy:'name'">
+                    <option selected="true">Selecione</option>
+                </select>-->
+            </div>
+            <div ng-repeat="order in orders" class="col-sm-6 col-sm-offset-0">
+                    Pedidos:
+                    <ul ng-repeat="details in order.orders">
+                        Data: {{ details.date | date:'dd/MM/yyyy' }}<br/>
+                        Pago: {{ details.status }}
+                        <!--div ng-init="getTotalByCustomer(details)"></div-->
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Produto</td>
+                                <td>Quantidade</td>
+                                <td>Valor</td>
+                            </tr>
+                            <tr ng-repeat="products in details.products">
+                                <td>{{ products.name }}</td>
+                                <td>{{ products.quantity }}</td>
+                                <td>{{ products.price | currency: 'R$ '}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>{{ getTotalByOrder(details) | currency: 'R$ ' }}</td>
+                            </tr>
+                        </table>
+                    </ul>
+                </div>
+                Total em aberto: {{ openTotalByCustomer | currency: 'R$ ' }}<br/>
+                Total de créditos: {{ credits | currency: 'R$ ' }}
+        </div>
+        
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<nav class="navbar navbar-default navbar-static-top" ng-controller="homeMainController">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="../customers.html">Clientes</a></li>
+            <li><a href="views/cart.html">Carrinho</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        	<li>{{ userInfo.name }}</li>
+        	<li><img src="{{ userInfo.twitter_info.photos[0].value }}"></li>
+        </ul>
+    </div>
+</nav>

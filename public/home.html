@@ -1,0 +1,49 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="dolcebistroHome">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Dolce Bistrô - Clientes</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<body ng-controller="homeMainController">
+    <div class="container">       
+
+    <!-- HEADER AND TODO COUNT -->
+    <div class="jumbotron text-center">
+        <h1>Dolce Bistrô <!--span class="label label-info">{{ customers.length }}</span--></h1>
+        <span>Olá {{ userInfo.name }}</span>
+    </div>
+
+    <div ng-include="'views/shared/menu.html'"></div>
+
+    <!-- TODO LIST -->
+    <div id="customer-list" class="row">
+        <div class="col-sm-2 col-sm-offset-1">
+
+            <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                
+        </div>            
+    </div>
+
+</body>
+</html>
