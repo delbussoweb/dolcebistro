@@ -1,4 +1,5 @@
 var dolcebistroCustomer = angular.module('dolcebistroCustomer', []);
+<<<<<<< HEAD
 var dolcebistroHome = angular.module('dolcebistroHome', []);
 
 function homeMainController($scope, $http){
@@ -7,6 +8,8 @@ function homeMainController($scope, $http){
 			$scope.userInfo = data;
 		});
 }
+=======
+>>>>>>> 35aab18769d352979e04d1e4e9576d6f83936b1d
 
 function mainController($scope, $http){
 	$scope.formData = {};
